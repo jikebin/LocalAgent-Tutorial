@@ -80,7 +80,6 @@ async def predict(message: list):
         thread = Thread(target=model.generate, kwargs=generation_kwargs)
         thread.start()
         for content in streamer:
-            # print(content)
             yield content.replace("\n", "\\n")
         yield "[DONE]"
     except:
