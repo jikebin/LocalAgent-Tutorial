@@ -1,0 +1,15 @@
+# Compiled Python files
+*.pyc
+
+# Temp File
+*.swp
+*.swa
+*.swo
+
+# virtualenv
+venv
+__pycache__
+#vscode 
+.vscode
+
+*.log
