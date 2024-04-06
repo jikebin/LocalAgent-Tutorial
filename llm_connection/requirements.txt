@@ -1,0 +1,4 @@
+requests
+ollama==0.1.7
+qianfan==0.2.3
+dashscope==1.14.1

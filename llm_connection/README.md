@@ -29,6 +29,13 @@ pip install -r requirements.txt
 
 [千帆官网](https://cloud.baidu.com/product/wenxinworkshop)
 
+## 自定义客户端
+
+满足如下要求：
+
+- 实现一个 stream 方法即可
+
+
 ## 统一的调用接口
 
 - [x] [llm_custom.py](./llm_custom.py)

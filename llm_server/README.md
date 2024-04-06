@@ -8,8 +8,19 @@
 
 在安装python项目环境之前，请确保您的电脑支持NVIDIA GPU，并且已经安装了CUDA和cuDNN。
 
-[requirements.txt](./requirements.txt)
+#### NVIDIA网址
 
+[CUDA Toolkit](https://developer.nvidia.com/cuda-downloads)
+[cuDNN](https://developer.nvidia.com/cudnn)
+
+
+#### 安装pytorch
+
+[pytorch官方文档](https://pytorch.org/)
+
+#### 其它依赖
+
+[requirements.txt](./requirements.txt)
 ```
 pip install -r requirements.txt
 ```

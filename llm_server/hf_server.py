@@ -81,7 +81,7 @@ async def predict(message: list):
         thread.start()
         for content in streamer:
             yield content.replace("\n", "\\n")
-        yield "[DONE]"
+        # yield "[DONE]"
     except:
         import traceback
         print(traceback.format_exc())

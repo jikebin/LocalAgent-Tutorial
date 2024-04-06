@@ -1,9 +1,12 @@
 #%%
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from hf_client import HuggingFaceClient
-from ollama_client import OllamaClient
-from qwen_online_client import QwenOnlineClient
-from qianfan_client import QianFanClient
+from llm_connection.hf_client import HuggingFaceClient
+from llm_connection.ollama_client import OllamaClient
+from llm_connection.qwen_online_client import QwenOnlineClient
+from llm_connection.qianfan_client import QianFanClient
 
 class CustomLLM:
 
