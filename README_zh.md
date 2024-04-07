@@ -29,4 +29,6 @@ python3.10
 - [x] [01-本地化部署服务](./llm_server/README.md)
 - [x] [02-本地化部署客户端](./llm_connection/README.md)
 - [x] [03-最简单的Agent样例](./example_agent/README.md)
-- [] [04-一些实用的Tools设计](./tools/README.md)
+- [ ] [04-实用的Tools设计](./tools/README.md)：常用Tools的设计与实现
+- [ ] [05-Multi-Agent的架构设计](./multi_agent/README.md)：对多Agent架构的探索
+- [ ] [07-引入RAG流程](./RAG_server/README.md)：增强Agent调用工具的稳定性
