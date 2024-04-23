@@ -68,6 +68,7 @@ class AgentDemo:
             for content in self.llm.stream(self.system + self.get_memory(),stop):
                 content_all += content
                 yield content
+            self.memory.append({'role': self.ASSISTANT, 'content': content_all})
             # 解析内容，不同的System描述，对应着不同的解析方式，可以自定义
             plugin_name, plugin_args = self.parse_plugin_split(content_all)
             if plugin_name and plugin_args:
