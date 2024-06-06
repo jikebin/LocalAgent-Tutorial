@@ -39,7 +39,7 @@ class AgentDemo:
         text = text.replace("\\n","\n")
         i = text.rfind('\nAction:')
         j = text.rfind('\nAction Input:')
-        k = text.rfind('\nObservation:')
+        k = text.rfind('\nObservation')
         if 0 <= i < j:  # If the text has `Action` and `Action input`,
             if k < j:  # but does not contain `Observation`,
                 # then it is likely that `Observation` is ommited by the LLM,
