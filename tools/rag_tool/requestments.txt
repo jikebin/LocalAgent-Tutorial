@@ -1,0 +1,6 @@
+fitz
+pdfplumber
+opencv-python
+frontend
+PyMuPDF
+langchain

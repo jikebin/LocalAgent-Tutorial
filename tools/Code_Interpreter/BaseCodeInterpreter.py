@@ -29,6 +29,7 @@ class BaseCodeInterpreter:
         error_flag:False表示正常返回，True表示代码错误
         """
         outputs, error_flag = self.nb.add_and_run(code_str)
+        self.nb.close() # 清除内核
         return outputs, error_flag
 
 
