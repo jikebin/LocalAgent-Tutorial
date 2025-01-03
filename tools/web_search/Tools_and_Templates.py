@@ -5,6 +5,7 @@ sys.path.append(os.path.split(os.path.dirname(os.path.dirname(os.path.abspath(__
 import json
 import requests
 import datetime
+from  example_agent.Tools_and_Templates import build_input_text
 
 
 tools = [
@@ -21,7 +22,31 @@ tools = [
             },
         ],
     },
+    {
+        "name_for_human": "搜索工具",
+        "name_for_model": "web_search_new",
+        "description_for_model": "在回答用户问题前，请先使用该工具进行相关信息的搜索，以确保回答的准确性。",
+        "parameters": [
+            {
+                "name": "query",
+                "description": "输入要查询的问题",
+                "required": True,
+                "schema": {"type": "string"},
+            },
+            {
+                "name": "freshness",
+                "description": '数据新鲜度，可选值为"oneDay", "oneWeek", "oneMonth", "oneYear","noLimit"不限（默认）',
+                "required": False,
+                "schema": {"type": "string"},
+                "enum" : ["oneDay","oneWeek","oneMonth","oneYear","noLimit"],
+                "default": "noLimit",
+            },
+        ],
+    },
 ]
+
+
+
 
 
 
@@ -71,8 +96,53 @@ def format_web_info(json_data):
 def get_system_prompt():
     return build_input_text(tools)
 
+
+# 使用博查API实现
+def web_search_new(query, count=8, freshness="noLimit"):
+    """
+    网页搜索工具
+    :param query: 查询内容
+    :param count: 返回结果数量
+    :param freshness: 数据新鲜度，可选值为"oneDay", "oneWeek", "oneMonth", "oneYear","noLimit"不限（默认）
+    """
+    url = "https://api.bochaai.com/v1/web-search"
+    payload = json.dumps({
+      "query": query,
+      "count": count,
+      "freshness" : freshness,
+      # "summary" : True,
+    })
+
+    headers = {
+       # TODO:这里要填入你的key
+      'Authorization': 'key',
+      'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    if not response.status_code == 200:
+        return  "未找到相关信息"
+    
+    res = response.json()
+    if str(res.get("code")) == "403":
+        return "余额不足"
+    elif str(res.get("code")) != "200":
+        return  "未找到相关信息"
+    
+    data_list = res["data"]["webPages"]["value"]
+    observation = "搜索结果：\n\n"
+    for data in data_list:
+        title = data["name"]
+        url = data["url"]
+        content = data["snippet"]
+        # dateLastCrawled = data["dateLastCrawled"] # 最后爬取时间
+        observation += f"# title: {title}\n## freshness\n{content}\n## URL\n{url}\n\n"
+    return observation
+
+
 available_functions = {
     "web_search": web_search,
+    "web_search_new" : web_search_new,
 }
 
 if __name__ == "__main__":
