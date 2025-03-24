@@ -18,7 +18,7 @@ def merge_fields(target, source):
         elif value is not None and isinstance(value, dict):
             merge_fields(target[key], value)
 
-
+# 将流式数据合并到message中
 def merge_chunk(final_response: dict, delta: dict) -> None:
     delta.pop("role", None)
     merge_fields(final_response, delta)
@@ -28,7 +28,7 @@ def merge_chunk(final_response: dict, delta: dict) -> None:
         index = tool_calls[0].pop("index")
         merge_fields(final_response["tool_calls"][index], tool_calls[0])
 
-
+# 将函数转换为JSON Schema格式
 def function_to_json(func) -> dict:
     """
     Converts a Python function into a JSON-serializable dictionary
